@@ -32,9 +32,10 @@ public class MainWindow extends AnchorPane {
             return;
         }
         String response = duke.getResponse(input);
+        String commandType = duke.getCommandType();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage));
+                DialogBox.getDukeDialog(response, dukeImage, commandType));
         userInput.clear();
     }
 }

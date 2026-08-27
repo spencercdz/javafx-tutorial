@@ -37,8 +37,13 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(String message, Image image) {
+        return getDukeDialog(message, image, "");
+    }
+
+    public static DialogBox getDukeDialog(String message, Image image, String commandType) {
         DialogBox dialogBox = new DialogBox(message, image);
         dialogBox.flip();
+        dialogBox.changeDialogStyle(commandType);
         return dialogBox;
     }
 
@@ -48,5 +53,18 @@ public class DialogBox extends HBox {
         ObservableList<Node> children = FXCollections.observableArrayList(getChildren());
         Collections.reverse(children);
         getChildren().setAll(children);
+        dialog.getStyleClass().add("reply-label");
+    }
+
+    /** Adds a visual treatment for supported Duke command categories. */
+    private void changeDialogStyle(String commandType) {
+        switch (commandType) {
+        case "add" -> dialog.getStyleClass().add("add-label");
+        case "marked" -> dialog.getStyleClass().add("marked-label");
+        case "delete" -> dialog.getStyleClass().add("delete-label");
+        default -> {
+            // The standard response style needs no additional class.
+        }
+        }
     }
 }
