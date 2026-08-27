@@ -1,4 +1,7 @@
 import javafx.geometry.Pos;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -21,5 +24,19 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String message, Image image) {
         return new DialogBox(message, image);
+    }
+
+    public static DialogBox getDukeDialog(String message, Image image) {
+        DialogBox dialogBox = new DialogBox(message, image);
+        dialogBox.flip();
+        return dialogBox;
+    }
+
+    /** Moves the avatar to the left to distinguish Duke's messages. */
+    private void flip() {
+        setAlignment(Pos.TOP_LEFT);
+        ObservableList<Node> children = FXCollections.observableArrayList(getChildren());
+        FXCollections.reverse(children);
+        getChildren().setAll(children);
     }
 }
